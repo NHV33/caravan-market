@@ -2,7 +2,7 @@
   <% @vehicles.each do |vehicle| %>
     <div>
       <ul>
-        <li><%= vehicle.user %></li>
+        <li><%= vehicle.user.email %></li>
         <li><%= vehicle.title %></li>
         <li><%= vehicle.description %></li>
         <li><%= vehicle.price %></li>
