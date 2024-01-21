@@ -5,7 +5,7 @@ class CreateVehicles < ActiveRecord::Migration[7.1]
       t.string :title
       t.text :description
       t.integer :price
-      t.string :days
+      t.integer :days
 
       t.timestamps
     end

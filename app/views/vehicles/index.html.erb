@@ -1,0 +1,13 @@
+<div class="container d-flex w-50 flex-column">
+  <% @vehicles.each do |vehicle| %>
+    <div>
+      <ul>
+        <li><%= vehicle.user %></li>
+        <li><%= vehicle.title %></li>
+        <li><%= vehicle.description %></li>
+        <li><%= vehicle.price %></li>
+        <li><%= vehicle.days%></li>
+      </ul>
+    </div>
+  <% end %>
+</div>

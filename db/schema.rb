@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_21_092637) do
     t.string "title"
     t.text "description"
     t.integer "price"
-    t.string "days"
+    t.integer "days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_vehicles_on_user_id"
