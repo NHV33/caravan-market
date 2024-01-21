@@ -1,0 +1,27 @@
+<div class="container d-flex w-50 flex-column pt-3">
+  <% @listings.each do |listing| %>
+  <div class="card mb-3 shadow-sm" style="max-width: 100%;">
+    <div class="row g-0">
+
+      <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+      </div>
+
+        <div class="col-md-8 px-3">
+          <div class="card-body">
+
+            <h5 class="card-title"><%= "\"#{listing[:vehicle].title}\"" %></h5>
+            <p class="card-text"><%= listing[:vehicle].description %></p>
+            <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{listing[:vehicle].user.email}" %></small></p>
+            <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{listing[:vehicle].price}" %></small></p>
+
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              <%= render 'partials/days', days: listing[:days] %>
+              <%= link_to 'Rent Now', vehicle_path(listing[:vehicle]), class: "btn btn-danger text-white text-shadow w-75 m-3 margin-auto" %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
