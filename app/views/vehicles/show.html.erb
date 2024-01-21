@@ -1,0 +1,11 @@
+<div class="container w-50 border shadow-sm">
+  <ul>
+    <li><%= @listing[:vehicle].user.email %></li>
+    <li><%= "\"#{@listing[:vehicle].title}\"" %></li>
+    <li><%= @listing[:vehicle].description %></li>
+    <li><%= "Daily Rate: #{@listing[:vehicle].price}" %></li>
+    <%= render 'partials/days', days: @listing[:days] %>
+  </ul>
+
+  <%= link_to 'Back to Listings', vehicles_url, class: "btn btn-primary" %>
+</div>

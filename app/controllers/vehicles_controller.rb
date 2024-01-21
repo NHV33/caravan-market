@@ -1,25 +1,8 @@
 class VehiclesController < ApplicationController
 
-  # before_action :
-
-  def index
-    @vehicles = Vehicle.all
-  end
-
-  def show
-    @vehicle = Vehicle.find(params[:id])
-    @days_hash = int_to_days_hash(@vehicle.days)
-  end
-
-  private
-
-  def vehicle_params
-    params.require(:vehicle).permit(:user, :title, :description, :price, :days)
-  end
-
   def int_to_days_hash(num)
     dotw = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-    bin = num.to_s(2).rjust(7, "0")
+    bin = num.to_i.to_s(2).rjust(7, "0")
     days = {}
     bin.chars.each_with_index do | digit, index |
       days[dotw[index]] = (digit == "1")
@@ -33,6 +16,28 @@ class VehiclesController < ApplicationController
       days_hash[key] == true ? bin += "1" : bin += "0"
     end
     return bin.to_i(2)
+  end
+
+  # before_action :
+
+  def index
+    vehicles = Vehicle.all
+    @listings = []
+    vehicles.each do |vehicle|
+      days_hash = int_to_days_hash(vehicle.days)
+      @listings << { vehicle: vehicle, days: days_hash }
+    end
+  end
+
+  def show
+    vehicle = Vehicle.find(params[:id])
+    @listing = { vehicle: vehicle, days: int_to_days_hash(vehicle.days) }
+  end
+
+  private
+
+  def vehicle_params
+    params.require(:vehicle).permit(:user, :title, :description, :price, :days)
   end
 
 end

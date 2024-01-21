@@ -15,12 +15,12 @@ vehicles = ["caravan", "camper", "RV", "SUV", "wagon"]
 
 instance_count = 20
 
-# instance_count.times do |index|
-#   user = User.new
-#   user.email = "#{Faker::Name.first_name}@example.com"
-#   user.password = '#$taawktljasktlw4aaglj'
-#   user.save!
-# end
+instance_count.times do |index|
+  user = User.new
+  user.email = "#{Faker::Name.first_name}@example.com"
+  user.password = '#$taawktljasktlw4aaglj'
+  user.save!
+end
 
 instance_count.times do |index|
   user = User.all.sample
