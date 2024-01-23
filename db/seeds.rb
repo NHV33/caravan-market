@@ -35,3 +35,25 @@ instance_count.times do |index|
   new_vehicle.save!
   puts "Saved! #{index + 1} of #{instance_count}"
 end
+
+
+# Generate Bookings
+instance_count.times do |index|
+  user = User.all.sample
+  vehicle = Vehicle.all.sample
+
+  start_date = Faker::Date.forward(days: 23)
+  end_date = start_date + Random.rand(1..5).days
+
+  status = ['confirmed', 'pending', 'cancelled'].sample
+
+  # Create a new Booking
+  booking = Booking.new(
+    user: user,
+    vehicle: vehicle,
+    start_date: start_date,
+    end_date: end_date,
+    status: status
+  )
+  booking.save
+end
