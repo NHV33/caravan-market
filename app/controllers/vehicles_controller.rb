@@ -34,6 +34,23 @@ class VehiclesController < ApplicationController
     @listing = { vehicle: vehicle, days: int_to_days_hash(vehicle.days) }
   end
 
+  def create
+    @vehicle = Vehicle.new(vehicle_params)
+    if @vehicle.save
+     redirect_to @vehicle
+    else
+      render :new, status: 422
+    end
+  end
+
+  def new
+    @vehicle = Vehicle.new
+  end
+
+  def edit
+
+  end
+
   private
 
   def vehicle_params
