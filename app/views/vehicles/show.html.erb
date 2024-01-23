@@ -1,5 +1,10 @@
 <div class="container w-50 border shadow-sm">
 <h1><%= @listing[:vehicle].title %></h1>
+<button class="btn btn-primary">Book now</button>
+<div>
+  <%= image_tag "campingcar.jpeg", alt: "camping car", width: 400%>
+  <%= image_tag "interior.webp", alt: "camping car interior", width: 400%>
+</div>
   <ul>
     <li><%= @listing[:vehicle].user.email %></li>
     <li><%= "\"#{@listing[:vehicle].title}\"" %></li>
