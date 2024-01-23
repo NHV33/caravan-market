@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   # get "/vehicles" => "vehicles#index", as: :vehicles
-  resources :vehicles
+  resources :vehicles do
+    resources :bookings, only: [:new, :create, :show]
+  end
 end
