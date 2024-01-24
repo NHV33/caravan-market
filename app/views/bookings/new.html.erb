@@ -1,0 +1,30 @@
+<h1>New Booking for <%= @vehicle.title %></h1>
+
+<%= form_with(model: [@vehicle, @booking], local: true) do |form| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+      <ul>
+      <% @booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <%= form.hidden_field :vehicle_id, value: @vehicle.id %>
+
+  <div class="actions">
+    <%= form.submit "Create Booking" %>
+  </div>
+<% end %>
