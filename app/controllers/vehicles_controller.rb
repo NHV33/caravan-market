@@ -10,10 +10,12 @@ class VehiclesController < ApplicationController
     return days
   end
 
-  def days_hash_to_int(days_hash)
+  def days_list_to_int(days_list)
+    return 0 unless days_list.kind_of?(Array)
+    dotw = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     bin = ""
-    days_hash.keys.each do |key|
-      days_hash[key] == true ? bin += "1" : bin += "0"
+    dotw.each do |day|
+      days_list.include?(day) ? bin += "1" : bin += "0"
     end
     return bin.to_i(2)
   end
@@ -35,7 +37,8 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    @vehicle = Vehicle.new(vehicle_params)
+    @vehicle = current_user.vehicles.build(vehicle_params)
+    @vehicle.days = days_list_to_int(params[:vehicle][:days])
     if @vehicle.save
      redirect_to @vehicle
     else
@@ -47,14 +50,24 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new
   end
 
-  def edit
+  def update
+    @vehicle = Vehicle.find(params[:id])
+    @vehicle.days = days_list_to_int(params[:vehicle][:days])
+    if @vehicle.update(vehicle_params)
+     redirect_to @vehicle, notice: "Information updated!"
+    else
+      render :edit
+    end
+  end
 
+  def edit
+    @vehicle = Vehicle.find(params[:id])
   end
 
   private
 
   def vehicle_params
-    params.require(:vehicle).permit(:user, :title, :description, :price, :days)
+    params.require(:vehicle).permit(:user, :title, :description, :price)
   end
 
 end
