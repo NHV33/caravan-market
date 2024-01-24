@@ -57,6 +57,12 @@
 
   <div class="w-100 d-flex justify-content-start mt-3 mb-2">
     <%= link_to '〈 Browse More Vehicles', vehicles_url, class: "btn btn-success text-white text-shadow mx-3" %>
-    <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(:vehicle_id), class: "btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
+    <% if @listing[:vehicle][:user_id] == current_user.id %>
+      <%# Displays Edit Button if provider / owner %>
+      <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "btn btn-primary text-white text-shadow flex-grow-1 mx-5" %>
+    <% else%>
+      <%# Displays Reserve Button if customer %>
+      <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(:vehicle_id), class: "btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
+    <% end %>
   </div>
 </div>
