@@ -14,15 +14,27 @@
           <li class="nav-item active">
             <%= link_to "Home", "/", class: "nav-link" %>
           </li>
+          <li class="nav-item"><div class="nav-link"> | </div></li>
+
           <li class="nav-item active">
-            <%= link_to "Rent a Vehicle", vehicles_path, class: "nav-link" %>
+            <%= link_to "Find a Vehicle", vehicles_path, class: "nav-link" %>
           </li>
+          <li class="nav-item"><div class="nav-link"> | </div></li>
+
+          <li class="nav-item active">
+            <%= link_to "Share Your Vehicle", new_vehicle_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item"><div class="nav-link"> | </div></li>
+
           <li class="nav-item">
             <%= link_to "Login", "users/sign_in", class: "nav-link" %>
           </li>
+          <li class="nav-item"><div class="nav-link"> | </div></li>
+
           <li class="nav-item">
             <%= link_to "Logout", destroy_user_session_path, class: "nav-link" %>
           </li>
+
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>

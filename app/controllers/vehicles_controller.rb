@@ -11,7 +11,7 @@ class VehiclesController < ApplicationController
   end
 
   def days_list_to_int(days_list)
-    return 0 unless days_list.kind_of?(Array)
+    return 0 unless (days_list.kind_of?(Array) && days_list.length >= 1 && days_list.length <= 7)
     dotw = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
     bin = ""
     dotw.each do |day|
