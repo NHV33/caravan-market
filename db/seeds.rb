@@ -73,10 +73,6 @@ end
 instance_count.times do |index|
   booking = Booking.all.sample
   user = booking.user
-
-  # Debugging statements
-  puts "Generating review #{index + 1}: Booking ID: #{booking.id}, User ID: #{user.id}"
-
   rating = Random.rand(1..5)
   content = Faker::Lorem.sentence(word_count: 10)
 
