@@ -1,60 +1,72 @@
-<div class="mt-3 p-2 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
-  <div class="p-1">
+<div class="mt-3 p-4 container w-50 border shadow-sm d-flex flex-column justify-content-center">
 
-    <table class="w-75">
-      <tbody>
-        <tr class="border-bottom">
-          <h1 class="text-capitalize">
-            <%= @listing[:vehicle].title %>
-          </h1>
-        </tr>
-        <tr class="border-bottom">
-          <td class="d-flex flex-column text-end px-3">Provider: </td>
-          <td class="px-1"><%= @listing[:vehicle].user.email %></td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="d-flex flex-column text-end px-3">Daily Rate: </td>
-          <td class="px-1">¥<%= @listing[:vehicle].price %></td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="d-flex flex-column text-end px-3">Description: </td>
-          <td class="px-1"><%= @listing[:vehicle].description %></td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="d-flex flex-column justify-content-center align-items-center text-end px-3">Availability: </td>
-          <td class="pt-2">
-            <div class="d-flex w-100 justify-content-start">
-              <%= render 'partials/days', days: @listing[:days] %>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="carouselExampleIndicators" class="carousel slide w-50 mt-2">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <%= image_tag "campingcar.jpeg", alt: "camping car", class: "d-block w-100"%>
+  <!-- This is the content header section -->
+  <div class="content-header">
+    <div>
+      <h1 class="text-capitalize">
+        <%= @listing[:vehicle].title %>
+      </h1>
     </div>
-    <div class="carousel-item">
-      <%= image_tag "interior.webp", alt: "camping car interior", class: "d-block w-100"%>
+
+    <div class="icons">
+      <i class="icon1 fa-sharp fa-solid fa-arrow-up-from-bracket"></i>
+      <i class="icon2 fa-regular fa-heart"></i>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon bg-black rounded-circle" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon bg-black rounded-circle" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
+  <!-- This is the image carousel and description section -->
+  <div class="flex-container">
+    <div id="carouselExampleIndicators" class="carousel slide w-50 mt-2">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag "campingcar.jpeg", alt: "camping car", class: "d-block w-100"%>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "interior.webp", alt: "camping car interior", class: "d-block w-100"%>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-black rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-black rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="highlight-container w-50 mt-4">
+      <div class="">
+        <div class="highlight-item">
+          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-solid fa-money-bill-wave"></i></div>
+          <div class="highlight-info col-9">¥<%= @listing[:vehicle].price %></div>
+        </div>
+        <div class="highlight-item mt-5">
+          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-solid fa-circle-info"></i></div>
+          <div class="highlight-info col-9"><%= @listing[:vehicle].description %></div>
+        </div>
+        <div class="highlight-item mt-5">
+          <div class="highlight-icon col-3 d-flex justify-content-center mt-2"><i class="fa-solid fa-calendar-days"></i></div>
+          <div class="highlight-info d-flex col-9"><%= render 'partials/days', days: @listing[:days] %></div>
+        </div>
+        <div class="highlight-item mt-5">
+          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-regular fa-user"></i></div>
+          <div class="highlight-info col-9"><%= @listing[:vehicle].user.email %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- This is the section to display customer reviews -->
+  <div class="review-container mt-4">
+    <h2>Reviews</h2>
+  </div>
+
+  <!-- This is the CTA -->
   <div class="w-100 d-flex justify-content-start mt-3 mb-2">
     <%= link_to '〈 Browse More Vehicles', vehicles_url, class: "btn btn-success text-white text-shadow mx-3" %>
     <% if @listing[:vehicle][:user_id] == current_user.id %>
@@ -66,3 +78,38 @@
     <% end %>
   </div>
 </div>
+
+
+
+
+
+<!-- Keep the code below just in case for now -->
+<!--
+<div class="p-1">
+      <table class="w-75">
+        <tbody>
+          <tr>
+            <td class="d-flex flex-column text-end px-3">Daily Rate: </td>
+            <td class="px-1">¥<%= @listing[:vehicle].price %></td>
+          </tr>
+          <tr>
+            <td class="d-flex flex-column text-end px-3">Description: </td>
+            <td class="px-1"><%= @listing[:vehicle].description %></td>
+          </tr>
+          <tr>
+            <td class="d-flex flex-column justify-content-center align-items-center text-end px-3">Availability: </td>
+            <td class="pt-2">
+              <div class="d-flex w-100 justify-content-start">
+                <%= render 'partials/days', days: @listing[:days] %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="d-flex flex-column text-end px-3">Provider: </td>
+            <td class="px-1"><%= @listing[:vehicle].user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  -->
