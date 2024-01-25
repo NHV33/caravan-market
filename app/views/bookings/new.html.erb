@@ -1,0 +1,39 @@
+<div class="mt-3 p-4 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
+
+
+  <h1>Reserve "<span class="text-capitalize"><%= @vehicle.title %></span>"</h1>
+
+  <%# TODO: Add a picture of the caravan to the booking page (after we integrate image uploads).%>
+
+  <%= form_with(model: [@vehicle, @booking], local: true) do |form| %>
+    <% if @booking.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+        <ul>
+        <% @booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field m-4">
+      <%= form.label "Rental Date:" %>
+      <%= form.date_field :start_date %>
+    </div>
+
+    <div class="field m-4">
+      <%= form.label "Return Date:" %>
+      <%= form.date_field :end_date %>
+    </div>
+
+    <%= form.hidden_field :vehicle_id, value: @vehicle.id %>
+
+    <div class="w-100 d-flex justify-content-center">
+      <div class="actions">
+        <%= form.submit "Create Booking", class: "btn btn-danger text-shadow text-white" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
