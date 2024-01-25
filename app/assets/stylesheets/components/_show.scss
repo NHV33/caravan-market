@@ -1,0 +1,45 @@
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icons {
+  font-size: 24px;
+
+  .icon1 {
+    &:hover {
+      cursor: pointer;
+      color: #838181;
+    }
+  }
+
+  .icon2 {
+    &:hover {
+      cursor: pointer;
+      color: #838181;
+    }
+  }
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+}
+
+
+.highlight-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+
+  .highlight-icon {
+    font-size: 32px;
+  }
+
+  .highlight-info {
+    padding: 4px;
+    font-size: 16px;
+  }
+}
