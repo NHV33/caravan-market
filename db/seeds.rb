@@ -10,18 +10,29 @@ require "faker"
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-intros = ["You will love this", "You'll have a wonderful time camping in this", "Enjoy the great outdoors in this", "Lose your self in this"]
-vehicles = ["caravan", "camper", "RV", "SUV", "wagon"]
+# Generate Test User
+test_user = User.new
+test_user.email = "#{Faker::Name.first_name}@me.com"
+test_user.password = 'secret'
+test_user.save!
+
+# email: test@me.com
+# password: secret
 
 instance_count = 20
 
+# Generate Users
 instance_count.times do |index|
   user = User.new
   user.email = "#{Faker::Name.first_name}@example.com"
-  user.password = '#$taawktljasktlw4aaglj'
+  user.password = 'secret'
   user.save!
 end
 
+intros = ["You will love this", "You'll have a wonderful time camping in this", "Enjoy the great outdoors in this", "Lose yourself in this"]
+vehicles = ["caravan", "camper", "RV", "SUV", "wagon"]
+
+# Generate Vehicles
 instance_count.times do |index|
   user = User.all.sample
   vehicle = vehicles.sample
@@ -34,4 +45,27 @@ instance_count.times do |index|
   p [title, description, price, days]
   new_vehicle.save!
   puts "Saved! #{index + 1} of #{instance_count}"
+end
+
+# Generate Bookings
+instance_count.times do |index|
+  user = User.all.sample
+  vehicle = Vehicle.all.sample
+
+  start_date = Faker::Date.forward(days: 23)
+  end_date = start_date + Random.rand(1..5).days
+
+  status = Random.rand(0..3)
+
+  # Create a new Booking
+  booking = Booking.new(
+    user: user,
+    vehicle: vehicle,
+    start_date: start_date,
+    end_date: end_date,
+    status: status
+  )
+  p [user, vehicle, start_date, end_date, status]
+  booking.save!
+  puts "Saved Booking! #{index + 1} of #{instance_count}"
 end
