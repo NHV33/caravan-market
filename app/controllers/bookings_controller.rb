@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!,  only: [:index]
+
   def new
     @vehicle = Vehicle.find(params[:id])
     @booking = Booking.new
@@ -16,8 +18,12 @@ class BookingsController < ApplicationController
     end
   end
 
+  def index
+    @my_bookings = current_user.bookings
+  end
+
   private
   def booking_params
-    params.require(:booking).permit(:)
+    params.require(:booking).permit(:user, :vehicle, :status, :start_date, :end_date)
   end
 end
