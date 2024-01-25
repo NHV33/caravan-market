@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create, :show]
   end
 
-  get '/my_bookings', to: 'bookings#index', as: 'my_bookings'
+  get '/bookings', to: 'bookings#index', as: 'bookings'
 end
