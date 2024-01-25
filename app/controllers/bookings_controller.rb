@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
     @vehicle = Vehicle.find(params[:booking][:vehicle_id])
     @booking = Booking.new(booking_params)
     @booking.vehicle = @vehicle
-    @booking.status = 'pending'
+    @booking.status = 0 #Status must be type integer.
     @booking.user = current_user
 
     if @booking.save
@@ -21,6 +21,7 @@ class BookingsController < ApplicationController
   end
 
   private
+
   def booking_params
     params.require(:booking).permit(:start_date, :end_date, :status, :vehicle_id) #add :user_id later
   end
