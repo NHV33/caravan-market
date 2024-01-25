@@ -74,7 +74,12 @@
       <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "btn btn-primary text-white text-shadow flex-grow-1 mx-5" %>
     <% else%>
       <%# Displays Reserve Button if customer %>
+<<<<<<< Updated upstream
       <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(@listing[:vehicle]), class: "btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
+=======
+      <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(:vehicle_id), class: "btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
+                                                            vehicle_id: @vehicle.id
+>>>>>>> Stashed changes
     <% end %>
   </div>
 </div>

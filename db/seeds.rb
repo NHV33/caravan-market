@@ -12,8 +12,8 @@ require "faker"
 
 # Generate Test User
 test_user = User.new
-test_user.email = "#{Faker::Name.first_name}@me.com"
-test_user.password = 'secret'
+test_user.email = "test@me.com"
+test_user.password = "secret"
 test_user.save!
 
 # email: test@me.com
@@ -25,7 +25,7 @@ instance_count = 20
 instance_count.times do |index|
   user = User.new
   user.email = "#{Faker::Name.first_name}@example.com"
-  user.password = 'secret'
+  user.password = "secret"
   user.save!
 end
 
@@ -63,9 +63,31 @@ instance_count.times do |index|
     vehicle: vehicle,
     start_date: start_date,
     end_date: end_date,
-    status: status
+    status: status,
   )
   p [user, vehicle, start_date, end_date, status]
   booking.save!
   puts "Saved Booking! #{index + 1} of #{instance_count}"
+end
+
+instance_count.times do |index|
+  booking = Booking.all.sample
+  user = booking.user
+
+  # Debugging statements
+  puts "Generating review #{index + 1}: Booking ID: #{booking.id}, User ID: #{user.id}"
+
+  rating = Random.rand(1..5)
+  content = Faker::Lorem.sentence(word_count: 10)
+
+  # Create a new Review
+  review = Review.new(
+    booking: booking,
+    user_id: user.id,
+    rating: rating,
+    content: content,
+  )
+  p [booking, user, rating, content]
+
+  review.save!
 end
