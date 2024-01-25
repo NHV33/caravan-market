@@ -1,0 +1,15 @@
+<div class="container d-flex w-50 flex-column pt-3">
+<h1>My Bookings</h1>
+
+<% if @my_bookings.present? %>
+  <ul>
+    <% @my_bookings.each do |booking| %>
+      <li>
+        <%= "Date: #{booking.start_date} - #{booking.end_date}, Status: #{booking.status}" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No bookings found.</p>
+<% end %>
+</div>

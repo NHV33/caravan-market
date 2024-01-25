@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!,  only: [:index]
+
   def new
     @vehicle = Vehicle.find(params[:vehicle_id])
     @booking = Booking.new
@@ -6,10 +8,10 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @vehicle = Vehicle.find(params[:booking][:vehicle_id])
+    @vehicle = Vehicle.find(params[:vehicle_id])
     @booking = Booking.new(booking_params)
     @booking.vehicle = @vehicle
-    @booking.status = 'pending'
+    @booking.status = 0 #Status must be type integer.
     @booking.user = current_user
 
     if @booking.save
@@ -20,8 +22,13 @@ class BookingsController < ApplicationController
     end
   end
 
+  def index
+    @my_bookings = current_user.bookings
+  end
+
   private
+
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :status, :vehicle_id) #add :user_id later
+    params.require(:booking).permit(:start_date, :end_date, :vehicle_id) #add :user_id later
   end
 end
