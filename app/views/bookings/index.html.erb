@@ -2,13 +2,31 @@
 <h1>My Bookings</h1>
 
 <% if @my_bookings.present? %>
-  <ul>
     <% @my_bookings.each do |booking| %>
-      <li>
-        <%= "Date: #{booking.start_date} - #{booking.end_date}, Status: #{booking.status}" %>
-      </li>
-    <% end %>
-  </ul>
+     <div class="card mb-3 shadow-sm" style="max-width: 100%;">
+    <div class="row g-0">
+
+      <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+      </div>
+
+        <div class="col-md-8 px-3">
+          <div class="card-body">
+
+            <h5 class="card-title text-capitalize"><%= booking.vehicle.title %></h5>
+            <p class="card-text"><small class="text-body-secondary">Departure: <%= booking.start_date %></small></p>
+            <p class="card-text"><small class="text-body-secondary">Return: <%= booking.end_date %></small></p>
+            <p class="card-text">Rental Duration: <%= (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds %> days</p>
+
+            <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{booking.vehicle.user.email}" %></small></p>
+            <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{format_price(booking.vehicle.price)}" %></small></p>
+            <p class="card-text">Total Price: <%= format_price(booking.vehicle.price * 2) %></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <% else %>
   <p>No bookings found.</p>
 <% end %>
