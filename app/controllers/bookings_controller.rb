@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
     @vehicle = Vehicle.find(params[:vehicle_id])
     @booking = Booking.new(booking_params)
     @booking.vehicle = @vehicle
-    @booking.status = 0 #Status must be type integer.
+    @booking.status = :pending
     @booking.user = current_user
 
     if @booking.save
