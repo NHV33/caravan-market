@@ -1,22 +1,24 @@
-<div class="mt-3 p-4 container w-50 border shadow-sm d-flex flex-column justify-content-center">
+<div class="w-75 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
 
   <!-- This is the content header section -->
-  <div class="content-header">
+  <div class="px-4">
     <div>
       <h1 class="text-capitalize">
         <%= @listing[:vehicle].title %>
       </h1>
     </div>
-
+    <!-- Decorative Icons
     <div class="icons">
       <i class="icon1 fa-sharp fa-solid fa-arrow-up-from-bracket"></i>
       <i class="icon2 fa-regular fa-heart"></i>
-    </div>
+    </div> -->
   </div>
 
   <!-- This is the image carousel and description section -->
-  <div class="flex-container">
-    <div id="carouselExampleIndicators" class="carousel slide w-50 mt-2">
+  <div class="d-flex flex-wrap w-100 align-items-center justify-content-center p-2">
+
+    <!-- Image Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide w-50 mx-3">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -39,77 +41,48 @@
       </button>
     </div>
 
-    <div class="highlight-container w-50 mt-4">
-      <div class="">
-        <div class="highlight-item">
-          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-solid fa-money-bill-wave"></i></div>
-          <div class="highlight-info col-9">¥<%= @listing[:vehicle].price %></div>
-        </div>
-        <div class="highlight-item mt-5">
-          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-solid fa-circle-info"></i></div>
-          <div class="highlight-info col-9"><%= @listing[:vehicle].description %></div>
-        </div>
-        <div class="highlight-item mt-5">
-          <div class="highlight-icon col-3 d-flex justify-content-center mt-2"><i class="fa-solid fa-calendar-days"></i></div>
-          <div class="highlight-info d-flex col-9"><%= render 'partials/days', days: @listing[:days] %></div>
-        </div>
-        <div class="highlight-item mt-5">
-          <div class="highlight-icon col-3 d-flex justify-content-center"><i class="fa-regular fa-user"></i></div>
-          <div class="highlight-info col-9"><%= @listing[:vehicle].user.email %></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- This is the section to display customer reviews -->
-  <div class="review-container mt-4">
-    <h2>Reviews</h2>
-  </div>
-
-  <!-- This is the CTA -->
-  <div class="w-100 d-flex justify-content-start mt-3 mb-2">
-    <%= link_to '〈 Browse More Vehicles', vehicles_url, class: "btn btn-success text-white text-shadow mx-3" %>
-    <% if @listing[:vehicle][:user_id] == current_user.id %>
-      <%# Displays Edit Button if provider / owner %>
-      <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "btn btn-primary text-white text-shadow flex-grow-1 mx-5" %>
-    <% else%>
-      <%# Displays Reserve Button if customer %>
-      <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(@listing[:vehicle]), class: "btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
-    <% end %>
-  </div>
-</div>
-
-
-
-
-
-<!-- Keep the code below just in case for now -->
-<!--
-<div class="p-1">
-      <table class="w-75">
+      <!-- Description -->
+      <table class="d-flex flex-column justify-content-evenly mx-2">
         <tbody>
-          <tr>
-            <td class="d-flex flex-column text-end px-3">Daily Rate: </td>
-            <td class="px-1">¥<%= @listing[:vehicle].price %></td>
+          <tr class="d-flex align-items-center my-5">
+            <td class="fs-1 col-1"><i class="d-flex justify-content-center fa-solid fa-money-bill-wave"></i></td>
+            <td class="px-4 fs-5">¥<%= @listing[:vehicle].price %></td>
           </tr>
-          <tr>
-            <td class="d-flex flex-column text-end px-3">Description: </td>
-            <td class="px-1"><%= @listing[:vehicle].description %></td>
+          <tr class="d-flex align-items-center my-5">
+            <td class="fs-1 col-1"><i class="d-flex justify-content-center fa-solid fa-circle-info"></i></td>
+            <td class="px-4 fs-5"><%= @listing[:vehicle].description %></td>
           </tr>
-          <tr>
-            <td class="d-flex flex-column justify-content-center align-items-center text-end px-3">Availability: </td>
-            <td class="pt-2">
-              <div class="d-flex w-100 justify-content-start">
-                <%= render 'partials/days', days: @listing[:days] %>
-              </div>
-            </td>
+          <tr class="d-flex align-items-center my-5">
+            <td class="fs-1 col-1"><i class="d-flex justify-content-center fa-solid fa-calendar-days"></i></td>
+            <td class="px-4 fs-5 d-flex flex-wrap"><%= render 'partials/days', days: @listing[:days] %></td>
           </tr>
-          <tr>
-            <td class="d-flex flex-column text-end px-3">Provider: </td>
-            <td class="px-1"><%= @listing[:vehicle].user.email %></td>
+          <tr class="d-flex align-items-center my-5">
+            <td class="fs-1 col-1"><i class="d-flex justify-content-center fa-regular fa-user"></i></td>
+            <td class="px-4 fs-5"><%= @listing[:vehicle].user.email %></td>
           </tr>
+
         </tbody>
       </table>
     </div>
+
+    <!-- This is the CTA -->
+    <div class="w-100 d-flex justify-content-around mt-3 px-5">
+      <%= link_to '〈 Browse More Vehicles', vehicles_url, class: "fs-5 btn btn-success text-white text-shadow mx-3" %>
+      <% if @listing[:vehicle][:user_id] == current_user.id %>
+        <%# Displays Edit Button if provider / owner %>
+        <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "fs-5 btn btn-primary text-white text-shadow flex-grow-1 mx-5" %>
+      <% else%>
+        <%# Displays Reserve Button if customer %>
+        <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(@listing[:vehicle]), class: "fs-5 btn btn-danger text-white text-shadow flex-grow-1 mx-5" %>
+      <% end %>
+    </div>
+
   </div>
-  -->
+
+
+    <!-- This is the section to display customer reviews -->
+  <div class="w-75 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
+    <h2>Reviews</h2>
+  </div>
+</div>
