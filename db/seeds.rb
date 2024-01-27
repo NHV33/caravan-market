@@ -85,4 +85,5 @@ instance_count.times do |index|
   )
   p [booking, user, rating, content]
   review.save!
+
 end
