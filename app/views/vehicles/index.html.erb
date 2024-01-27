@@ -12,7 +12,7 @@
             <h5 class="card-title text-capitalize"><%= listing[:vehicle].title %></h5>
             <p class="card-text"><%= listing[:vehicle].description %></p>
             <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{listing[:vehicle].user.email}" %></small></p>
-            <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{listing[:vehicle].price}" %></small></p>
+            <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{format_price(listing[:vehicle].price)}" %></small></p>
 
             <div class="d-flex flex-column justify-content-center align-items-center">
               <div class="d-flex w-100 justify-content-center">

@@ -2,7 +2,6 @@
 <h1>My Bookings</h1>
 
 <% if @my_bookings.present? %>
-  <ul>
     <% @my_bookings.each do |booking| %>
      <div class="card mb-3 shadow-sm" style="max-width: 100%;">
     <div class="row g-0">
@@ -28,7 +27,6 @@
     </div>
   <% end %>
 </div>
-  </ul>
 <% else %>
   <p>No bookings found.</p>
 <% end %>
