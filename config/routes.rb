@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   # get "/vehicles" => "vehicles#index", as: :vehicles
   resources :vehicles do
-    resources :bookings, only: [:new, :create, :show]
+    resources :bookings, only: [:new, :create, :show] do
+      resources :reviews, only: [:new, :create, :index, :show]
+    end
   end
 
   get '/bookings', to: 'bookings#index', as: 'bookings'

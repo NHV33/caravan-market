@@ -14,3 +14,13 @@
 .text-shadow {
   text-shadow: 1px 1px 1px rgba($color: #000000, $alpha: 0.33);
 }
+
+.star-rating .star {
+  font-size: 1.5em;
+  color: #ddd; 
+  cursor: pointer;
+}
+
+.star-rating .rating-star:checked ~ .star {
+  color: #ffd700;
+}
