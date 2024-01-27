@@ -23,7 +23,8 @@ class BookingsController < ApplicationController
   end
 
   def index
-    @my_bookings = current_user.bookings
+    @my_bookings = current_user.bookings.order(start_date: :asc)  # or :desc for descending order
+    # @my_bookings = @my_bookings.where('start_date >= ?', Date.today)
   end
 
   private

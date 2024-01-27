@@ -29,6 +29,7 @@ class VehiclesController < ApplicationController
       days_hash = int_to_days_hash(vehicle.days)
       @listings << { vehicle: vehicle, days: days_hash }
     end
+    @listings.reverse!
   end
 
   def search
