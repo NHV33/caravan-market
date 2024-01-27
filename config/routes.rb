@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   # get "/vehicles" => "vehicles#index", as: :vehicles
+  get '/vehicles/search', to: 'vehicles#search', as: 'vehicles_search'
+
   resources :vehicles do
     resources :bookings, only: [:new, :create, :show]
   end

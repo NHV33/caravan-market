@@ -31,6 +31,18 @@ class VehiclesController < ApplicationController
     end
   end
 
+  def search
+    @query = params[:query]
+    vehicles = Vehicle.all
+    @listings = []
+    vehicles.each do |vehicle|
+      days_hash = int_to_days_hash(vehicle.days)
+      if vehicle.title.downcase.include?(@query) || vehicle.description.downcase.include?(@query)
+        @listings << { vehicle: vehicle, days: days_hash }
+      end
+    end
+  end
+
   def show
     vehicle = Vehicle.find(params[:id])
     @listing = { vehicle: vehicle, days: int_to_days_hash(vehicle.days) }
