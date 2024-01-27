@@ -1,11 +1,13 @@
-<div class="container d-flex w-50 flex-column pt-3">
 
-  <%= form_with url: "/vehicles/search", method: :get do |form| %>
-    <%= form.label :query, "Search for:" %>
-    <%= form.text_field :query %>
-    <%= form.submit "Search" %>
+<div class="col-12 container d-flex justify-content-center align-items-center mt-3">
+  <%= form_with url: "/vehicles/search", method: :get, class: "fs-2 d-flex justify-content-center align-items-center" do |form| %>
+    <%# form.label :query, "" %>
+    <%= form.text_field :query, placeholder: "Find your perfect caravan" %>
+    <%= form.submit "Search", class: "btn btn-success text-white text-shadow fs-4 mx-2" %>
   <% end %>
+</div>
 
+<div class="container d-flex w-50 flex-column pt-3">
   <%= render 'partials/listings', listings: @listings %>
 </div>
 <!--

@@ -1,10 +1,6 @@
 <div class="container d-flex w-50 flex-column pt-3">
-
-  <%= form_with url: "/vehicles/search", method: :get do |form| %>
-    <%= form.label :query, "Search for:" %>
-    <%= form.text_field :query %>
-    <%= form.submit "Search" %>
-  <% end %>
+  <h1>Showing Results for "<%= @query %>"</h1>
+  <%= link_to '〈 See All Vehicles', vehicles_url, class: "col-lg-4 col-sm-12 my-2 fs-5 btn btn-secondary text-white text-shadow d-flex align-items-center justify-content-center" %>
 
   <%= render 'partials/listings', listings: @listings %>
 </div>
