@@ -1,17 +1,4 @@
-
-<div class="col-6 container d-flex justify-content-center align-items-center mt-3">
-  <%= form_with url: "/vehicles/search", method: :get, class: "col-12 fs-4 d-flex justify-content-start align-items-center" do |form| %>
-    <%# form.label :query, "" %>
-    <%= form.text_field :query, placeholder: "Find your perfect caravan!", class: "p-1 px-3 col-8 fs-4" %>
-    <%= form.submit "🔍", class: "btn btn-success text-white text-shadow fs-4 mx-2 rounded-pill" %>
-  <% end %>
-</div>
-
-<div class="container d-flex col-6 flex-column pt-3">
-  <%= render 'partials/listings', listings: @listings %>
-</div>
-<!--
-  <% @listings.each do |listing| %>
+<% listings.each do |listing| %>
   <div class="card mb-3 shadow-sm" style="max-width: 100%;">
     <div class="row g-0">
 
