@@ -6,12 +6,22 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    @booking = Booking.find(params[:booking_id])
     @review = Review.new(review_params)
-    @review.save
-    redirect_to @review.product
-  end
-end
+    @review.booking = @booking
+    @review.user = current_user  # Set the user for the review
 
-def review_params
-  params.require(:review).permit(:rating, :content)
+    if @review.save
+      redirect_to root_path, notice: 'Review was successfully created.'
+    else
+      @vehicle = @booking.vehicle
+      render :new
+    end
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:rating, :content)
+  end
 end
