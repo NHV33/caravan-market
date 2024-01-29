@@ -12,14 +12,17 @@
         <div class="col-md-8 px-3">
           <div class="card-body">
 
+          <p class="btn btn-danger text-white text-shadow w-30 mb-2 margin-auto"><%= booking.status %></p>
+
             <h5 class="card-title text-capitalize"><%= booking.vehicle.title %></h5>
             <p class="card-text"><small class="text-body-secondary">Departure: <%= booking.start_date %></small></p>
             <p class="card-text"><small class="text-body-secondary">Return: <%= booking.end_date %></small></p>
-            <p class="card-text">Rental Duration: <%= (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds %> days</p>
+            <% rental_duration = (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds + 1 %>
+            <p class="card-text">Rental Duration: <%= rental_duration %> days</p>
 
             <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{booking.vehicle.user.email}" %></small></p>
             <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{format_price(booking.vehicle.price)}" %></small></p>
-            <p class="card-text">Total Price: <%= format_price(booking.vehicle.price * 2) %></p>
+            <p class="card-text">Total Price: <%= format_price(booking.vehicle.price * rental_duration) %></p>
 
           </div>
         </div>
