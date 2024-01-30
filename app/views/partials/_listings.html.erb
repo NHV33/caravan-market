@@ -1,5 +1,5 @@
 <% listings.each do |listing| %>
-  <div class="card mb-3 shadow-sm" style="max-width: 100%;">
+  <div class="card mb-3 shadow-sm rounded img-fluid" style="max-width: 100%; background-color: pink;">
     <div class="row g-0">
 
       <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
@@ -9,15 +9,15 @@
           <div class="card-body">
 
             <h5 class="card-title text-capitalize"><%= listing[:vehicle].title %></h5>
-            <p class="card-text"><%= listing[:vehicle].description %></p>
-            <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{listing[:vehicle].user.email}" %></small></p>
+            <%# <p class="card-text"><%= listing[:vehicle].description</p> %>
+            <%# <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{listing[:vehicle].user.email}" %></small></p>
             <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{format_price(listing[:vehicle].price)}" %></small></p>
 
             <div class="d-flex flex-column justify-content-center align-items-center">
               <div class="d-flex w-100 justify-content-center">
                 <%= render 'partials/days', days: listing[:days] %>
               </div>
-              <%= link_to 'Reserve Now', vehicle_path(listing[:vehicle]), class: "btn btn-danger text-white text-shadow w-75 m-3 margin-auto" %>
+              <%= link_to 'View', vehicle_path(listing[:vehicle]), class: "btn btn-danger text-white text-shadow w-75 m-3 margin-auto" %>
             </div>
 
           </div>
@@ -25,4 +25,13 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="card" style="width:500px">
+  <img class="card-img-top" src="/app/assets/images/campingcar.jpeg" alt="Card image">
+  <div class="card-img-overlay">
+    <h4 class="card-title">John Doe</h4>
+    <p class="card-text">Some example text.</p>
+    <a href="#" class="btn btn-primary">See Profile</a>
+  </div>
 </div>
