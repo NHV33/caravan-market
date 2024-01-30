@@ -1,8 +1,8 @@
 <% listings.each do |listing| %>
-  <div class="card mb-3 shadow-sm rounded img-fluid" style="max-width: 100%; background-color: pink;">
+  <div class="card mb-3 shadow-sm rounded img-fluid" style="max-width: 100%; background-color: beige;">
     <div class="row g-0">
 
-      <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+      <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: white;">
       </div>
 
         <div class="col-md-8 px-3">
@@ -17,7 +17,7 @@
               <div class="d-flex w-100 justify-content-center">
                 <%= render 'partials/days', days: listing[:days] %>
               </div>
-              <%= link_to 'View', vehicle_path(listing[:vehicle]), class: "btn btn-danger text-white text-shadow w-75 m-3 margin-auto" %>
+              <%= link_to 'View', vehicle_path(listing[:vehicle]), class: "btn btn-primary text-white text-shadow rounded-pill w-50" %>
             </div>
 
           </div>
@@ -25,13 +25,4 @@
       </div>
     </div>
   <% end %>
-</div>
-
-<div class="card" style="width:500px">
-  <img class="card-img-top" src="/app/assets/images/campingcar.jpeg" alt="Card image">
-  <div class="card-img-overlay">
-    <h4 class="card-title">John Doe</h4>
-    <p class="card-text">Some example text.</p>
-    <a href="#" class="btn btn-primary">See Profile</a>
-  </div>
 </div>
