@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get '/vehicles/search', to: 'vehicles#search', as: 'vehicles_search'
 
   resources :vehicles do
-    resources :bookings, only: [:new, :create, :show]
+    resources :bookings, only: [:new, :create, :show] do
+      resources :reviews, only: [:new, :create, :index, :show]
+    end
   end
 
   get '/bookings', to: 'bookings#index', as: 'bookings'
