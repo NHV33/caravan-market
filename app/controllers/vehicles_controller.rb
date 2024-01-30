@@ -45,8 +45,8 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    vehicle = Vehicle.find(params[:id])
-    @listing = { vehicle: vehicle, days: int_to_days_hash(vehicle.days) }
+    @vehicle = Vehicle.includes(bookings: :reviews).find(params[:id])
+    @listing = { vehicle: @vehicle, days: int_to_days_hash(@vehicle.days) }
   end
 
   def create
