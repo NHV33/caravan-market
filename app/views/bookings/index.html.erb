@@ -1,4 +1,30 @@
-<div class="container d-flex w-50 flex-column pt-3">
+<div class="container d-flex pt-3">
+<div class="container col-6">
+<div class="booking-requests">
+<h1>Booking Requests</h1>
+
+<% if @provider_bookings.present? %>
+<% @provider_bookings.each do |provider_booking| %>
+<div class="card mb-3 shadow-sm" style="max-width: 100%;">
+    <div class="row g-0">
+    <div class="nav-item dropdown">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          </div>
+    <div>
+<h5><%= provider_booking.user.email %></h5> wants to rent <%= provider_booking.vehicle.title %></div>
+<p>From:
+<%= provider_booking.start_date %> To: <%= provider_booking.end_date %></p>
+</div>
+        </div>
+<% end %>
+</div>
+<% else %>
+  <p>No bookings found.</p>
+<% end %>
+</div>
+
+<div class="container col-6">
+<div class="my-bookings">
 <h1>My Bookings</h1>
 
 <% if @my_bookings.present? %>
@@ -31,7 +57,7 @@
             <h5>¥<%= format_price(booking.vehicle.price * rental_duration) %></h5>
             </div>
             <div class="d-flex justify-content-between">
-            <div class="d-flex justify-content-between"><p class="card-text text-primary">Departure: </p><p><%= booking.start_date %></p></div>
+            <div class="d-flex justify-content-between"><p class="card-text text-primary">Rental: </p><p><%= booking.start_date %></p></div>
             <div class="d-flex justify-content-between"><p class="card-text text-primary">Return: </p><p><%= booking.end_date %></p></div>
             <div><p class="card-text">(<%= rental_duration %> days)</p></div>
             </div>
@@ -48,4 +74,5 @@
 <% else %>
   <p>No bookings found.</p>
 <% end %>
+</div>
 </div>
