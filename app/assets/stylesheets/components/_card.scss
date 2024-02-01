@@ -1,10 +1,13 @@
 .custom-card {
-  border-radius: 30%;
+  border-radius: 10px;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  // box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   padding: 20px;
-  // border: 5px solid #a87c48;
   background-color: white;
+
+  &:hover {
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.5);
+  }
 }
 
 
@@ -12,16 +15,21 @@
   max-width: 100%;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+  // box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.5);
   margin: auto;
 }
 
+.card-body {
+  background-color: white;
+}
+
 .small-text {
-  font-size: 0.8em; /* adjust as needed */
+  font-size: 0.8em;
 }
 
 .text-grey {
-  color: grey; /* adjust as needed */
+  color: grey;
 }
 
 .no-wrap {
@@ -30,4 +38,8 @@
 
 .custom-btn {
   background-color: #634623;
+
+  &:hover {
+    background-color: #ad7a3d;
+  }
 }
