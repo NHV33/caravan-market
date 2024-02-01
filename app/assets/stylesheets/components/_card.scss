@@ -1,0 +1,29 @@
+.custom-card {
+  border-radius: 30%;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  // border: 5px solid #a87c48;
+  background-color: white;
+}
+
+
+.card-img-top {
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+.small-text {
+  font-size: 0.8em; /* adjust as needed */
+}
+
+.text-grey {
+  color: grey; /* adjust as needed */
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
