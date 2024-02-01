@@ -3,7 +3,6 @@
     <h2>New Review for <%= @vehicle.title %> </h2>
     <h3>You booked on <%= @booking.start_date %></h3>
   </div>
-
   <div class="w-75 mt-3">
     <%= simple_form_for @review, url: vehicle_booking_reviews_path(@vehicle, @booking), method: :post do |f| %>
       <% if @review.errors.any? %>
@@ -16,24 +15,18 @@
           </ul>
         </div>
       <% end %>
-
       <div class="form-group">
         <%= f.input :content, as: :text, input_html: { class: "form-control" } %>
       </div>
-
-   <div class="form-group star-rating">
-  <%= f.label :rating %>
-  <div class="rating">
-    <% (1..5).reverse_each do |rating| %>
-      <%= f.radio_button :rating, rating, class: 'rating-star', id: "rating_#{rating}", hidden: true %>
-      <%= f.label :rating, '★', value: rating, class: 'star', title: "#{rating} stars", for: "rating_#{rating}" %>
-    <% end %>
-  </div>
-</div>
-
-
+      <div class="form-group star-rating">
+        <%= f.label :rating %>
+        <div class="rating">
+          <% (1..5).reverse_each do |rating| %>
+            <%= f.radio_button :rating, rating, class: 'rating-star', id: "rating_#{rating}", hidden: true %>
+            <%= f.label :rating, '★', value: rating, class: 'star', title: "#{rating} stars", for: "rating_#{rating}" %>
+          <% end %>
+        </div>
       </div>
-
       <%= f.button :submit, "Create Review", class: "btn btn-primary text-shadow text-white w-100" %>
     <% end %>
   </div>

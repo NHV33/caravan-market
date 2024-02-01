@@ -18,7 +18,6 @@ class ReviewsController < ApplicationController
     @review.booking = @booking
     @review.user = current_user
     @vehicle = @booking.vehicle
-
     if @review.save
       redirect_to vehicle_booking_review_path(@vehicle, @booking, @review), notice: 'Review was successfully created.'
     else
