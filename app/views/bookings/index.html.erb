@@ -6,23 +6,38 @@
      <div class="card mb-3 shadow-sm" style="max-width: 100%;">
     <div class="row g-0">
 
-      <div class="col-md-4 temporary-vehicle" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+  <div class="col-md-4 temporary-vehicle position-relative" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+  <% case booking.status.to_sym %>
+      <% when :pending %>
+      <% badge_color = "bg-warning" %>
+      <% when :approved %>
+      <% badge_color = "bg-success" %>
+      <% when :declined %>
+      <% badge_color = "bg-danger" %>
+      <% when :cancelled %>
+      <% badge_color = "bg-secondsary" %>
+      <% end %>
+
+   <p class="badge text-white <%= badge_color %> text-shadow position-absolute mt-2 ms-2 p-2" style="border-radius: 50px; width: 100px; z-index: 1;"><%= booking.status %></p>
       </div>
 
         <div class="col-md-8 px-3">
           <div class="card-body">
 
-          <p class="btn btn-danger text-white text-shadow w-30 mb-2 margin-auto"><%= booking.status %></p>
+<% rental_duration = (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds + 1 %>
 
-            <h5 class="card-title text-capitalize"><%= booking.vehicle.title %></h5>
-            <p class="card-text"><small class="text-body-secondary">Departure: <%= booking.start_date %></small></p>
-            <p class="card-text"><small class="text-body-secondary">Return: <%= booking.end_date %></small></p>
-            <% rental_duration = (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds + 1 %>
-            <p class="card-text">Rental Duration: <%= rental_duration %> days</p>
+            <div class="d-flex justify-content-between col-12">
+            <h4 class="card-title text-capitalize"><%= booking.vehicle.title %></h4>
+            <h5>¥<%= format_price(booking.vehicle.price * rental_duration) %></h5>
+            </div>
+            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between"><p class="card-text text-primary">Departure: </p><p><%= booking.start_date %></p></div>
+            <div class="d-flex justify-content-between"><p class="card-text text-primary">Return: </p><p><%= booking.end_date %></p></div>
+            <div><p class="card-text">(<%= rental_duration %> days)</p></div>
+            </div>
 
-            <p class="card-text"><small class="text-body-secondary"><%= "Provider: #{booking.vehicle.user.email}" %></small></p>
-            <p class="card-text"><small class="text-body-secondary"><%= "Daily Rate: #{format_price(booking.vehicle.price)}" %></small></p>
-            <p class="card-text">Total Price: <%= format_price(booking.vehicle.price * rental_duration) %></p>
+            <p class="card-text"><small class="text-body-secondary">Provider: </small><small><%=  booking.vehicle.user.email %></small></p>
+            <div class="d-flex justify-content-between col-4"><p class="card-text"><small class="text-body-secondary">Daily Rate: </small></p><p><small class="text-body-secondary">¥<%= format_price(booking.vehicle.price) %></small></p></div>
 
           </div>
         </div>

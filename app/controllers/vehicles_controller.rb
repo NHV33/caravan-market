@@ -46,11 +46,12 @@ class VehiclesController < ApplicationController
 
   def show
     @vehicle = Vehicle.find(params[:id])
-    @vehicle_reviews = @vehicle.reviews
+    @booking = Booking.find_by(user_id: current_user.id, vehicle_id: @vehicle.id)
+    @booking_count = current_user.bookings.where(vehicle_id: @vehicle.id).count
+    @reviews_for_vehicle = Review.joins(booking: :vehicle).where(bookings: { vehicle_id: @vehicle.id })
     @listing = { vehicle: @vehicle, days: int_to_days_hash(@vehicle.days) }
   end
 
-  
   def create
     @vehicle = current_user.vehicles.build(vehicle_params)
     @vehicle.days = days_list_to_int(params[:vehicle][:days])
