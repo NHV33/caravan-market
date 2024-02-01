@@ -83,5 +83,17 @@
     <!-- This is the section to display customer reviews -->
   <div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
     <h2>Reviews</h2>
+    <% if @vehicle_reviews.any? %>
+    <% @vehicle_reviews.each do |review| %>
+      <div class="review">
+        <h3><%= review.title %></h3>
+        <p><%= review.content %></p>
+        <p>Rating: <%= review.rating %></p>
+        <!-- Display other review details as needed -->
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews available for this vehicle.</p>
+  <% end %>
   </div>
 </div>
