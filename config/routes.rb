@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create, :show] do
       resources :reviews, only: [:new, :create, :index, :show]
     end
+    resources :provider_bookings, only: [:update]
   end
 
   get '/bookings', to: 'bookings#index', as: 'bookings'
