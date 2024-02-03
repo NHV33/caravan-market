@@ -1,91 +1,101 @@
 <div class="container d-flex pt-3">
-<div class="container col-6">
-<div class="booking-requests">
-<h1>Booking Requests</h1>
+  <div class="card col-6 p-3 m-2" style="background-color: rgba(255, 255, 255, 0.5);">
+    <h1>Booking Requests</h1>
 
-<% if @provider_bookings.present? %>
-<% @provider_bookings.each do |provider_booking| %>
-<div class="card mb-3 shadow-sm" style="max-width: 100%;">
-<div class="d-flex">
-    <div class="d-flex align-items-center p-3">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <h4 class="ms-2"><%= provider_booking.user.email %></h4>
-          </div>
+    <% if @provider_bookings.present? %>
+    <% @provider_bookings.each do |provider_booking| %>
+    <div class="default-card mb-3" style="max-width: 100%;">
+    <div class="d-flex justify-content-between">
+    <div class="col-8">
+      <div class="d-flex align-items-center">
+        <h4><%= provider_booking.user.email %></h4>
+      </div>
     <div class="d-flex">
- <p class="mb-0">wants to rent </p><h5><strong><%= provider_booking.vehicle.title %></strong></h5></div>
-<p>From:
-<%= provider_booking.start_date %> To: <%= provider_booking.end_date %></p>
-<div>
-<% if provider_booking.pending? %>
-<%= simple_form_for provider_booking, url: bookings_path(provider_booking), method: :patch do |f| %>
-<%= f.input :status, as: :hidden, input_html: { value: 'approved' } %>
-<%= f.submit 'Accept', class: 'btn btn-info' %>
-<% end %>
-<%= simple_form_for provider_booking, url: bookings_path(provider_booking), method: :patch do |f| %>
-<%= f.input :status, as: :hidden, input_html: { value: 'declined' } %>
-<%= f.submit 'Reject', class: 'btn btn-light' %>
-<% end %>
-</div>
-<% else %>
-<p><%= provider_booking.status %></p>
-<% end %>
-</div>
-        </div>
-<% end %>
-</div>
-<% else %>
-  <p>No bookings found.</p>
-<% end %>
-</div>
+      <p class="mb-0">wants to rent </p><h5 class="ms-3"><strong><%= provider_booking.vehicle.title %></strong></h5></div>
+      <p>From:
+      <%= provider_booking.start_date %> To: <%= provider_booking.end_date %></p>
+    </div>
+  <div class="col-4 d-flex justify-content-center align-items-center">
+    <% if provider_booking.pending? %>
+    <div class="d-flex">
+      <%= simple_form_for provider_booking do |f| %>
+      <%= f.input :status, as: :hidden, input_html: { value: "approved" } %>
+      <%= f.submit 'Accept', class: 'm-1 btn btn-success' %>
+    <% end %>
+      <%= simple_form_for provider_booking do |f| %>
+      <%= f.input :status, as: :hidden, input_html: { value: "declined" } %>
+      <%= f.submit 'Reject', class: 'm-1 btn btn-danger text-white' %>
+    <% end %>
+     </div>
+  <% else %>
+  <% case provider_booking.status %>
+      <% when "pending" %>
+      <% badge_color = "bg-warning" %>
+      <% when "approved" %>
+      <% badge_color = "bg-success" %>
+      <% when "declined" %>
+      <% badge_color = "bg-danger" %>
+      <% when "cancelled" %>
+      <% badge_color = "bg-secondary" %>
+      <% end %>
+      <p class="m-0">Status:</p>
+    <span class="badge text-white <%= badge_color %> text-shadow mb-0 ms-2 p-2" style="border-radius: 50px; width: 100px; z-index: 1;"><%= provider_booking.status %></span>
+    <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No bookings found.</p>
+      <% end %>
+    </div>
 
-<div class="container col-6">
-<div class="my-bookings">
+<div class="card col-6 p-3 m-2" style="background-color: rgba(255, 255, 255, 0.5);">
 <h1>My Bookings</h1>
 
 <% if @my_bookings.present? %>
-    <% @my_bookings.each do |booking| %>
-     <div class="card mb-3 shadow-sm" style="max-width: 100%;">
+  <% @my_bookings.each do |booking| %>
+    <div class="default-card mb-3" style="max-width: 100%;">
     <div class="row g-0">
 
   <div class="col-md-4 temporary-vehicle position-relative" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
-  <% case booking.status.to_sym %>
-      <% when :pending %>
+  <% case booking.status %>
+      <% when "pending" %>
       <% badge_color = "bg-warning" %>
-      <% when :approved %>
+      <% when "approved" %>
       <% badge_color = "bg-success" %>
-      <% when :declined %>
+      <% when "declined" %>
       <% badge_color = "bg-danger" %>
-      <% when :cancelled %>
-      <% badge_color = "bg-secondsary" %>
+      <% when "cancelled" %>
+      <% badge_color = "bg-secondary" %>
       <% end %>
 
-   <p class="badge text-white <%= badge_color %> text-shadow position-absolute mt-2 ms-2 p-2" style="border-radius: 50px; width: 100px; z-index: 1;"><%= booking.status %></p>
+   <span class="badge text-white <%= badge_color %> text-shadow position-absolute mt-2 ms-2 p-2" style="border-radius: 50px; width: 100px; z-index: 1;"><%= booking.status %></span>
       </div>
 
         <div class="col-md-8 px-3">
           <div class="card-body">
 
-<% rental_duration = (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds + 1 %>
+  <% rental_duration = (booking.end_date.to_time - booking.start_date.to_time).to_i / 1.day.seconds + 1 %>
 
             <div class="d-flex justify-content-between col-12">
             <h4 class="card-title text-capitalize"><%= booking.vehicle.title %></h4>
             <h5>¥<%= format_price(booking.vehicle.price * rental_duration) %></h5>
             </div>
-            <div class="d-flex justify-content-between">
-            <div class="d-flex justify-content-between"><p class="card-text text-primary">Rental: </p><p><%= booking.start_date %></p></div>
-            <div class="d-flex justify-content-between"><p class="card-text text-primary">Return: </p><p><%= booking.end_date %></p></div>
-            <div><p class="card-text">(<%= rental_duration %> days)</p></div>
+            <div>
+            <div class="d-flex"><p class="card-text text-primary col-4">Rental: </p><p class="col-4"><%= booking.start_date %></p></div>
+            <div class="d-flex"><p class="card-text text-primary col-4">Return: </p><p class="col-4"><%= booking.end_date %></p></div>
+            <div class="d-flex justify-content-end"><p class="card-text">(<%= rental_duration %> days)</p></div>
             </div>
 
-            <p class="card-text"><small class="text-body-secondary">Provider: </small><small><%=  booking.vehicle.user.email %></small></p>
-            <div class="d-flex justify-content-between col-4"><p class="card-text"><small class="text-body-secondary">Daily Rate: </small></p><p><small class="text-body-secondary">¥<%= format_price(booking.vehicle.price) %></small></p></div>
+            <p class="card-text">Provider: <%=  booking.vehicle.user.email %></p>
+            <div class="d-flex justify-content-between"><p class="card-text">Daily Rate: </p><p>¥<%= format_price(booking.vehicle.price) %></p></div>
 
           </div>
         </div>
       </div>
     </div>
   <% end %>
-</div>
 <% else %>
   <p>No bookings found.</p>
 <% end %>

@@ -31,15 +31,15 @@ class BookingsController < ApplicationController
   def update
     @provider_booking = current_user.provider_bookings.find(params[:id])
     if @provider_booking.update(booking_params)
-      redirect_to @provider_bookings, notice: 'Booking is successfully updated'
+      redirect_to bookings_path, notice: 'Booking is successfully updated'
     else
-      redirect_to @provider_bookings, notice: 'Booking status update is failed'
+      redirect_to bookings_path, alert: 'Booking status update is failed'
     end
   end
 
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :vehicle_id) #add :user_id later
+    params.require(:booking).permit(:start_date, :end_date, :vehicle_id, :status) #add :user_id later
   end
 end
