@@ -11,7 +11,11 @@
     <%# <%= turbo_include_tags %>
   </head>
 
-  <body>
+  <body style="position: relative; background: url(<%= @bg_url %>); background-position: top; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+
+    <!-- This div covers the background with a translucent black layer to increase contrast with bg-image -->
+    <div style="z-index: -10; position: fixed; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .3);"></div>
+
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
