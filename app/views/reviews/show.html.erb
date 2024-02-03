@@ -1,4 +1,4 @@
-<div class="mt-3 p-4 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
+<div class="default-card mt-3 p-4 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
   <div class="w-75 text-start">
     <h2>Review for <%= @vehicle.title %></h2>
     <h3>Booked on <%= @booking.start_date %></h3>
@@ -6,12 +6,12 @@
 
   <div class="w-75 mt-3">
     <div class="form-group">
-      <label><strong>Review Content:</strong></label>
+      <label><strong>Review:</strong></label>
       <p><%= @review.content %></p>
     </div>
 
     <div class="form-group">
-      <label><strong>Rating:</strong></label>
+      <label><strong>Overall Rating:</strong></label>
       <div class="star-rating">
         <% @review.rating.to_i.times do %>
           <span class="star" style="color: #ffd700;">★</span>
@@ -22,8 +22,8 @@
       </div>
     </div>
 
-     <div class="action-buttons">
+     <div class="action-buttons my-3">
       <%= link_to 'Back to Vehicle', vehicle_path(@vehicle), class: "btn btn-secondary" %>
       <%= link_to 'Edit Review', edit_vehicle_booking_review_path(@vehicle, @booking, @review), class: "btn btn-primary" %>
-      <%= link_to 'Delete Review', vehicle_booking_review_path(@vehicle, @booking, @review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to 'Delete Review', vehicle_booking_review_path(@vehicle, @booking, @review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
     </div>
