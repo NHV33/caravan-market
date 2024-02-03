@@ -1,4 +1,4 @@
-<div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center align-items-center">
+<div class="default-card col-6 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center align-items-center">
   <h1>Reserve "<span class="text-capitalize"><%= @vehicle.title %></span>"</h1>
   <%# TODO: Add a picture of the caravan to the booking page (after we integrate image uploads).%>
   <%= simple_form_for [@vehicle, @booking], local: true, data: { controller: "booking-form", booking_form_price_per_day_value: @vehicle.price } do |form| %>
