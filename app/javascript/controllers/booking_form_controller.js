@@ -18,7 +18,7 @@ export default class extends Controller {
       const pricePerDay = parseFloat(this.data.get("price-per-day-value"));
       const totalPrice = pricePerDay * diffDays;
       this.totalPriceTarget.textContent = `Total Price: ¥${parseInt(totalPrice, 10)}`;
-
+      this.totalPriceTarget.style.fontSize = "18px"
     }
   }
 }

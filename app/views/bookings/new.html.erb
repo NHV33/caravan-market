@@ -1,27 +1,19 @@
 <div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center align-items-center">
   <h1>Reserve "<span class="text-capitalize"><%= @vehicle.title %></span>"</h1>
   <%# TODO: Add a picture of the caravan to the booking page (after we integrate image uploads).%>
-  <%= form_with(model: [@vehicle, @booking], local: true, data: { controller: "booking-form", booking_form_price_per_day_value: @vehicle.price }) do |form| %>
-    <% if @booking.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-        <ul>
-          <% @booking.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+  <%= simple_form_for [@vehicle, @booking], local: true, data: { controller: "booking-form", booking_form_price_per_day_value: @vehicle.price } do |form| %>
+    <%= form.error_notification %>
+    <div class="field m-4">
+      <%= form.input :start_date, as: :string, input_html: { data: { booking_form_target: "startDate", action: "booking-form#calculateTotalPrice", controller: "flatpickr" }, class: "form-control datepicker" } %>
+    </div>
+    <div class="field m-4">
+      <%= form.input :end_date, as: :string, input_html: { data: { booking_form_target: "endDate", action: "booking-form#calculateTotalPrice", controller: "flatpickr" }, class: "form-control datepicker" } %>
+    </div>
+    <div class="summary  m-4 p-2">
+      <h2 style="font-size: 18px;">Vehicle price: ¥<%= @vehicle_price %></h2>
+      <div class="total-price" data-booking-form-target="totalPrice">
+        <h2 class="lead" style="font-size: 18px;">Total Price:</h2>
       </div>
-    <% end %>
-    <div class="field m-4">
-      <%= form.label :start_date, "Rental Date:" %>
-      <%= form.text_field :start_date, data: { booking_form_target: "startDate", action: "booking-form#calculateTotalPrice", controller: "flatpickr" }, class: "form-control" %>
-    </div>
-    <div class="field m-4">
-      <%= form.label :end_date, "Return Date:" %>
-      <%= form.text_field :end_date, data: { booking_form_target: "endDate", action: "booking-form#calculateTotalPrice", controller: "flatpickr" }, class: "form-control" %>
-    </div>
-    <div class="total-price m-4 p-2 rounded">
-      <h2 class="lead" data-booking-form-target="totalPrice">Total Price:</h2>
     </div>
     <%= form.hidden_field :vehicle_id, value: @vehicle.id %>
     <div class="w-100 d-flex justify-content-center">
