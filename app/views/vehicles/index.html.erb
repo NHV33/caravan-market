@@ -1,6 +1,6 @@
 
-<div class="col-6 container d-flex align-items-center mt-3">
-  <%= form_with url: "/vehicles/search", method: :get, class: "col-12 fs-4 d-flex justify-content-start align-items-center" do |form| %>
+<div class="col-12 container d-flex justify-content-start align-items-center mt-3">
+  <%= form_with url: "/vehicles/search", method: :get, class: "col-8 ps-3 fs-4 d-flex justify-content-start align-items-center" do |form| %>
     <%# form.label :query, "" %>
     <%= form.text_field :query, placeholder: "Find your perfect caravan!", class: "shadow border rounded-4 p-1 px-3 col-8 fs-4" %>
     <% svg_path = asset_path "search-icon.svg" %>

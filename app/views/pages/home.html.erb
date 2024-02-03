@@ -6,12 +6,14 @@
   <!-- This div covers the background with a translucent black layer to increase contrast with bg-image -->
   <div style="z-index: 10; position: fixed; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .9);"></div>
 
-  <div class="p-3 m-2", style="color: white; position: absolute; top: 16px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+  <div class="p-3 m-4", style="color: white; position: absolute; top: 16px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
     <% if user_signed_in? %>
       <h1>Welcome <%= current_user.email %>!</h1>
     <% end %>
     <h1>Drive into Adventure – Rent or Lease Camping Cars</h1>
-    <%= link_to 'Find a Vehicle', vehicles_path, class: "btn custom-btn text-white text-shadow rounded-pill mt-2" %>
-    <%= link_to 'Lease Your Vehicle', new_vehicle_path, class: "btn custom-btn text-white text-shadow rounded-pill mt-2 ms-1" %>
+    <div class="my-4 w-100">
+      <%= link_to 'Find a Vehicle', vehicles_path, class: "shadow custom-btn mt-2 fs-4" %>
+      <%= link_to 'Lease Your Vehicle', new_vehicle_path, class: "shadow col-6 custom-btn mt-2 ms-1 fs-4" %>
+    </div>
   </div>
 </div>
