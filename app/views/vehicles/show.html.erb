@@ -78,7 +78,7 @@
 
 <% if current_user && @booking.present? %>
   <h4>
-    You have booked this vehicle <%= @booking_count %> times
+    You have booked this vehicle <%= @booking_count %> <%= "time".pluralize(@booking_count) %>
   </h4>
   <%= link_to 'How was your experience on this vehicle?', new_vehicle_booking_review_path(@listing[:vehicle], @booking), class: "col-lg-12 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center w-100" %>
 <% end %>

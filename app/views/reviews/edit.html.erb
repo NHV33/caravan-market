@@ -1,6 +1,6 @@
-<div class="mt-3 p-4 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
+<div class="default-card mt-3 p-4 container w-50 border shadow-sm d-flex flex-column align-items-center justify-content-center">
   <div class="w-75 text-start">
-    <h2>Edit Review for <%= @vehicle.title %></h2>
+    <h2>Edit Review for <span class="text-capitalize"><%= @vehicle.title %></span> </h2>
     <h3>You booked on <%= @booking.start_date %></h3>
   </div>
 
@@ -18,11 +18,11 @@
       <% end %>
 
       <div class="form-group">
-        <%= f.input :content, as: :text, input_html: { class: "form-control" }, input_html: { value: @review.content } %>
+        <%= f.input :content, as: :text, input_html: { class: "form-control" }, input_html: { value: @review.content }, label: "How was your experience?" %>
       </div>
 
       <div class="form-group star-rating">
-        <%= f.label :rating %>
+        <%= f.label :rating, label: "How satisfied were you overall?" %>
         <div class="rating">
           <% (1..5).reverse_each do |rating| %>
             <%= f.radio_button :rating, rating, class: 'rating-star', id: "rating_#{rating}", hidden: true %>
