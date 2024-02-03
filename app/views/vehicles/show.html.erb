@@ -75,13 +75,38 @@
         <%# Displays Edit Button if provider / owner %>
         <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "col-lg-7 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center" %>
       <% end %>
+
+<% if current_user && @booking.present? %>
+  <h4>
+    You have booked this vehicle <%= @booking_count %> times
+  </h4>
+  <%= link_to 'How was your experience on this vehicle?', new_vehicle_booking_review_path(@listing[:vehicle], @booking), class: "col-lg-12 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center w-100" %>
+<% end %>
     </div>
 
   </div>
 
-
     <!-- This is the section to display customer reviews -->
-  <div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
-    <h2>Reviews</h2>
-  </div>
+<div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
+  <h2 class="text-center">Reviews</h2>
+  <% if @reviews_for_vehicle.any? %>
+    <% @reviews_for_vehicle.each do |review| %>
+      <div class="review-card my-4 p-3 rounded border">
+      <p class="mb-2"><%= review.user.email %></p> <!-- Display user email -->
+        <p class="mb-2"><%= review.content %></p>
+        <div class="star-rating mb-2">
+          <% review.rating.to_i.times do %>
+            <span class="star" style="color: #ffd700;">★</span>
+          <% end %>
+          <% (5 - review.rating.to_i).times do %>
+            <span class="star" style="color: #ffd700;">☆</span>
+          <% end %>
+        </div>
+        <!-- Display other review details as needed -->
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center">No reviews available for this vehicle.</p>
+  <% end %>
+</div>
 </div>
