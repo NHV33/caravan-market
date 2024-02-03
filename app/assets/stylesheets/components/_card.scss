@@ -47,10 +47,10 @@
 }
 
 .custom-btn {
-  background-color: #634623;
+  background-color: $primary;
 
   &:hover {
-    background-color: #ad7a3d;
+    filter: brightness(1.1);
   }
 }
 
