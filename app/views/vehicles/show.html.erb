@@ -1,4 +1,4 @@
-<div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center align-items-center">
+<div class="col-12 mt-3 p-4 bg-white rounded-4 container border shadow-sm d-flex flex-column justify-content-center align-items-center">
 
 
 
@@ -87,7 +87,7 @@
   </div>
 
     <!-- This is the section to display customer reviews -->
-<div class="col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
+<div class="default-card col-12 mt-3 p-4 container border shadow-sm d-flex flex-column justify-content-center">
   <h2 class="text-center">Reviews</h2>
   <% if @reviews_for_vehicle.any? %>
     <% @reviews_for_vehicle.each do |review| %>
