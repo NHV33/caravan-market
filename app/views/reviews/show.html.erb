@@ -23,7 +23,7 @@
     </div>
 
      <div class="action-buttons my-3">
-      <%= link_to 'Back to Vehicle', vehicle_path(@vehicle), class: "btn btn-secondary" %>
-      <%= link_to 'Edit Review', edit_vehicle_booking_review_path(@vehicle, @booking, @review), class: "btn btn-primary" %>
-      <%= link_to 'Delete Review', vehicle_booking_review_path(@vehicle, @booking, @review), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger text-white" %>
+      <%= link_to 'Back to Vehicle', vehicle_path(@vehicle), class: "rounded-pill px-4 btn btn-secondary" %>
+      <%= link_to 'Edit Review', edit_vehicle_booking_review_path(@vehicle, @booking, @review), class: "rounded-pill px-4 btn btn-primary" %>
+      <%= link_to 'Delete Review', vehicle_booking_review_path(@vehicle, @booking, @review), method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-pill px-4 btn btn-danger text-white" %>
     </div>

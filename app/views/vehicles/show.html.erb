@@ -24,10 +24,14 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <%= image_tag "campingcar.jpeg", alt: "camping car", class: "d-block w-100"%>
+          <div class="d-flex justify-content-center">
+            <%= image_tag "exteriors/exterior-#{@listing[:vehicle][:id] % 31}.jpeg", alt: "camping car", class: "d-block", style: "height: 300px;" %>
+          </div>
         </div>
         <div class="carousel-item">
-          <%= image_tag "interior.webp", alt: "camping car interior", class: "d-block w-100"%>
+          <div class="d-flex justify-content-center">
+            <%= image_tag "interiors/interior-#{@listing[:vehicle][:id] % 31}.jpeg", alt: "camping car", class: "d-block", style: "height: 300px;" %>
+          </div>
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -67,20 +71,20 @@
 
     <!-- This is the Button Section with CTA -->
     <div class="col-lg-10 col-sm-8 mt-2 d-flex flex-wrap justify-content-between">
-      <%= link_to '〈 See Other Vehicles', vehicles_url, class: "col-lg-4 col-sm-12 my-2 fs-5 btn btn-secondary text-white text-shadow d-flex align-items-center justify-content-center" %>
+      <%= link_to '〈 See Other Vehicles', vehicles_url, class: "rounded-pill col-lg-4 col-sm-12 my-2 fs-5 btn btn-secondary text-white text-shadow d-flex align-items-center justify-content-center" %>
       <% unless @listing[:vehicle][:user_id] == current_user.id %>
         <%# Displays Reserve Button if customer %>
-        <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(@listing[:vehicle]), class: "col-lg-7 col-sm-12 my-2 fs-5 btn btn-danger text-white text-shadow d-flex align-items-center justify-content-center" %>
+        <%= link_to 'Reserve This Vehicle', new_vehicle_booking_path(@listing[:vehicle]), class: "rounded-pill col-lg-7 col-sm-12 my-2 fs-5 btn btn-danger text-white text-shadow d-flex align-items-center justify-content-center" %>
       <% else%>
         <%# Displays Edit Button if provider / owner %>
-        <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "col-lg-7 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center" %>
+        <%= link_to '📝 Edit Vehicle Info', edit_vehicle_path, class: "rounded-pill col-lg-7 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center" %>
       <% end %>
 
 <% if current_user && @booking.present? %>
   <h4>
     You have booked this vehicle <%= @booking_count %> <%= "time".pluralize(@booking_count) %>
   </h4>
-  <%= link_to 'How was your experience on this vehicle?', new_vehicle_booking_review_path(@listing[:vehicle], @booking), class: "col-lg-12 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center w-100" %>
+  <%= link_to 'How was your experience on this vehicle?', new_vehicle_booking_review_path(@listing[:vehicle], @booking), class: "rounded-pill col-lg-12 col-sm-12 my-2 fs-5 btn btn-primary text-white text-shadow d-flex align-items-center justify-content-center w-100" %>
 <% end %>
     </div>
 
