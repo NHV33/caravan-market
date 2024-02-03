@@ -1,6 +1,8 @@
-<% days.each do |day, value| %>
-  <% available = (value) ? "bg-success" : "bg-danger-subtle opacity-50" %>
-  <div class="font-family-monospace text-white text-shadow p-1 m-1 border <%= available %>" style="font-family: monospace;">
-    <%= "#{day[...3]}" %>
-  </div>
-<% end %>
+<div class="d-flex">
+  <% days.each do |day, value| %>
+    <% available = (value) ? "bg-success" : "bg-danger-subtle opacity-50" %>
+      <div class="text-center font-family-monospace text-white text-shadow p-1 m-1 border <%= available %>" style="flex: 1 1 0%;">
+        <span class="text-sm"><%= "#{day[...3]}" %></span>
+      </div>
+  <% end %>
+</div>
