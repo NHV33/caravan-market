@@ -1,5 +1,5 @@
 <div class="container d-flex pt-3">
-  <div class="card col-6 p-3 m-2" style="background-color: rgba(255, 255, 255, 0.5);">
+  <div class="default-card col-6 p-3 m-2">
     <h1>Booking Requests</h1>
 
     <% if @provider_bookings.present? %>
@@ -20,11 +20,11 @@
     <div class="d-flex">
       <%= simple_form_for provider_booking do |f| %>
       <%= f.input :status, as: :hidden, input_html: { value: "approved" } %>
-      <%= f.submit 'Accept', class: 'm-1 btn btn-success' %>
+      <%= f.submit 'Accept', class: 'm-1 btn btn-success rounded-pill' %>
     <% end %>
       <%= simple_form_for provider_booking do |f| %>
       <%= f.input :status, as: :hidden, input_html: { value: "declined" } %>
-      <%= f.submit 'Reject', class: 'm-1 btn btn-danger text-white' %>
+      <%= f.submit 'Reject', class: 'm-1 btn btn-danger text-white rounded-pill' %>
     <% end %>
      </div>
   <% else %>
@@ -39,7 +39,7 @@
       <% badge_color = "bg-secondary" %>
       <% end %>
       <p class="m-0">Status:</p>
-    <span class="badge text-white <%= badge_color %> text-shadow mb-0 ms-2 p-2" style="border-radius: 50px; width: 100px; z-index: 1;"><%= provider_booking.status %></span>
+    <span class="badge text-white <%= badge_color %> text-shadow mb-0 ms-2 p-2 fs-6" style="border-radius: 50px;"><%= provider_booking.status %></span>
     <% end %>
               </div>
             </div>
@@ -50,7 +50,7 @@
       <% end %>
     </div>
 
-<div class="card col-6 p-3 m-2" style="background-color: rgba(255, 255, 255, 0.5);">
+<div class="default-card col-6 p-3 m-2">
 <h1>My Bookings</h1>
 
 <% if @my_bookings.present? %>
@@ -58,7 +58,7 @@
     <div class="default-card mb-3" style="max-width: 100%;">
     <div class="row g-0">
 
-  <div class="col-md-4 temporary-vehicle position-relative" style="background: url(<%= asset_path 'default_caravan.png' %>); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: white;">
+  <div class="col-md-4 temporary-vehicle position-relative" style="background: url(<%= asset_path "exteriors/exterior-#{booking.vehicle.id % 31}.jpeg" %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: white; border-radius: 10px;   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
   <% case booking.status %>
       <% when "pending" %>
       <% badge_color = "bg-warning" %>
