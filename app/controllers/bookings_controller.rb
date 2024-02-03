@@ -5,6 +5,20 @@ class BookingsController < ApplicationController
     @vehicle = Vehicle.find(params[:vehicle_id])
     @booking = Booking.new
     @booking.user = current_user
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    @vehicle_price = @vehicle.price
+
+    if @start_date.present? && @end_date.present?
+      start_date = Date.parse(@start_date)
+      end_date = Date.parse(@end_date)
+      total_days = (end_date - start_date).to_i + 1
+      @total_price = @vehicle_price * total_days
+    else
+      @total_price = 0
+    end
+
+    Rails.logger.info "Vehicle price: #{@vehicle_price}"
   end
 
   def create
